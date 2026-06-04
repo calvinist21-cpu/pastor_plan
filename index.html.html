@@ -27,7 +27,8 @@
     box-shadow:0 8px 26px -10px rgba(8,18,32,.55)}
   header h1{font-family:var(--serif);font-size:25px;font-weight:700;letter-spacing:.3px;display:flex;gap:9px;align-items:center}
   header .sub{font-size:13px;opacity:.82;margin-top:4px;letter-spacing:.3px}
-  header .brand{position:absolute;top:17px;right:22px;font-size:10px;letter-spacing:1.5px;color:var(--gold2);font-weight:700}
+  header .brand{position:absolute;top:17px;right:22px;font-size:10px;letter-spacing:1.5px;color:var(--gold2);font-weight:700;text-decoration:none;cursor:pointer;transition:.2s}
+  header .brand:hover{color:#fff;text-decoration:underline}
   .bar{height:3px;background:rgba(255,255,255,.16);border-radius:2px;margin-top:12px;overflow:hidden}
   .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .55s cubic-bezier(.4,0,.2,1)}
   .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:22px 16px 104px}
@@ -114,7 +115,7 @@
 <header>
   <h1>📋 목회계획 워크벤치 2027</h1>
   <div class="sub">하나님 나라 백성공동체, 역사종말론적 증언공동체</div>
-  <div class="brand">비전AI교육연구소</div>
+  <a class="brand" href="https://vision-ai-lab.vercel.app/" target="_blank" rel="noopener">비전AI교육연구소</a>
   <button class="themetoggle" id="themeBtn" onclick="toggleTheme()" aria-label="테마 전환">🌙</button>
   <div class="bar"><i id="prog"></i></div>
 </header>
