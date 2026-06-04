@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16324f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"><title>목회계획 워크벤치 2027 — PastorPlan</title>
+<style>
+
+  :root{
+    --navy:#152d49; --navy2:#21456b; --gold:#b08d57; --gold2:#c9a86d;
+    --ink:#272420; --sub:#6c6759; --line:#e7dcc4; --ok:#2e7d5b; --warnc:#b3402b;
+    --bg:#f4eee2; --bg2:#efe7d5; --card:#fffdf8;
+    --shadow:0 14px 36px -16px rgba(35,30,18,.30);
+    --serif:"Gowun Batang","Nanum Myeongjo",serif;
+    --sans:"Noto Sans KR",-apple-system,"Malgun Gothic","맑은 고딕",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);font-size:17px;line-height:1.8;min-height:100vh;
+    background:radial-gradient(1100px 540px at 82% -12%,rgba(176,141,87,.13),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg2));
+    background-attachment:fixed}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+    background:repeating-linear-gradient(135deg,rgba(176,141,87,.02) 0 2px,transparent 2px 7px)}
+  header{position:sticky;top:0;z-index:20;color:#f3ead4;padding:20px 24px 16px;
+    background:linear-gradient(135deg,var(--navy),var(--navy2));border-bottom:2px solid var(--gold);
+    box-shadow:0 8px 26px -10px rgba(8,18,32,.55)}
+  header h1{font-family:var(--serif);font-size:25px;font-weight:700;letter-spacing:.3px;display:flex;gap:9px;align-items:center}
+  header .sub{font-size:13px;opacity:.82;margin-top:4px;letter-spacing:.3px}
+  header .brand{position:absolute;top:17px;right:22px;font-size:10px;letter-spacing:1.5px;color:var(--gold2);font-weight:700}
+  .bar{height:3px;background:rgba(255,255,255,.16);border-radius:2px;margin-top:12px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .55s cubic-bezier(.4,0,.2,1)}
+  .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:22px 16px 104px}
+  .steps{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0}
+  .steps button{font-family:var(--sans);border:1px solid var(--line);background:rgba(255,255,255,.55);color:var(--sub);border-radius:30px;padding:9px 17px;font-size:13.5px;cursor:pointer;transition:.2s;backdrop-filter:blur(4px)}
+  .steps button:hover{border-color:var(--gold);color:var(--navy)}
+  .steps button.on{background:var(--navy);color:#f3ead4;border-color:var(--navy);font-weight:700;box-shadow:0 5px 14px -5px rgba(21,45,73,.55)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:var(--shadow);margin-bottom:16px;animation:rise .5s cubic-bezier(.2,.7,.2,1)}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  h2.t{font-family:var(--serif);font-size:27px;color:var(--navy);font-weight:700;letter-spacing:.3px;margin-bottom:5px;display:flex;align-items:center;gap:10px}
+  h2.t::before{content:"";width:28px;height:2px;background:var(--gold);display:inline-block}
+  .lead{color:var(--sub);font-size:15px;margin-bottom:18px;padding-left:38px}
+  label{display:block;font-weight:700;font-size:15px;letter-spacing:.2px;margin:16px 0 7px;color:var(--navy)}
+  input,select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:13px 15px;font-size:17px;font-family:var(--sans);background:#fffefb;color:var(--ink);transition:.18s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,141,87,.18);background:#fff}
+  textarea{resize:vertical;min-height:64px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>*{flex:1;min-width:130px}
+  .note{background:linear-gradient(180deg,#fbf6ea,#f6eeda);border:1px solid #ecdfc0;border-left:3px solid var(--gold);border-radius:11px;padding:13px 16px;font-size:14.5px;color:#6a5a31;margin:13px 0}
+  .note b{color:var(--navy)}
+  .warn{background:#fbeeea;border-left:3px solid var(--warnc);color:#8a3422;border-radius:11px;padding:12px 16px;font-size:14.5px;margin:10px 0}
+  .ok{background:#eaf6ef;border-left:3px solid var(--ok);color:#1f5f44;border-radius:11px;padding:12px 16px;font-size:14.5px;margin:10px 0}
+  table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px;margin:10px 0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:none}
+  th{background:linear-gradient(180deg,#f2e8d2,#ede1c8);color:var(--navy);font-weight:700;font-size:13.5px;letter-spacing:.4px}
+  td input,td textarea{border:1px solid transparent;background:transparent;padding:7px;font-size:14px;min-height:auto;border-radius:7px}
+  td input:focus{background:#fff;border-color:var(--gold);box-shadow:none}
+  .nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,253,247,.93);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:11px 16px;z-index:20}
+  .nav .wrapn{max-width:880px;margin:0 auto;display:flex;gap:10px;width:100%}
+  .btn{flex:1;border:none;border-radius:12px;padding:15px;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--sans);transition:.18s;letter-spacing:.4px}
+  .btn-p{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#f3ead4;box-shadow:0 7px 18px -7px rgba(21,45,73,.6)}
+  .btn-p:hover{filter:brightness(1.08)} .btn:active{transform:translateY(1px)}
+  .btn-g{background:#efe7d5;color:var(--navy);border:1px solid var(--line)}
+  .btn-ai{background:linear-gradient(135deg,#2e7d5b,#3f9e72);color:#fff;flex:none;padding:10px 16px;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:15px;font-family:var(--sans);box-shadow:0 6px 15px -7px rgba(46,125,91,.55)}
+  .pill{display:inline-block;background:#f1e8d3;color:var(--navy);border-radius:16px;padding:4px 12px;font-size:12.5px;font-weight:700;margin:2px}
+  .slider-row{display:flex;align-items:center;gap:12px;margin:5px 0}.slider-row span{width:38px;text-align:right;font-weight:700;color:var(--gold)}
+  input[type=range]{accent-color:var(--gold);height:4px}
+  .muted{color:var(--sub);font-size:13.5px}
+  .funnel{display:flex;gap:8px;margin:11px 0}.funnel div{flex:1;text-align:center;background:linear-gradient(180deg,#fff,#f6efe0);border:1px solid var(--line);border-radius:11px;padding:12px 4px;font-size:14px;color:var(--navy);font-weight:600}
+  @media print{
+    header,.steps,.nav,.noprint,body::before{display:none!important}
+    body{background:#fff;font-size:12.5pt}.wrap{padding:0;max-width:100%}
+    .card{box-shadow:none;border:none;padding:0;margin:0 0 10px;page-break-inside:avoid;animation:none}
+    #report{display:block!important}
+  }
+  #report{font-family:var(--serif)}
+  #report h3{font-family:var(--serif);color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:5px;margin:16px 0 7px;font-size:20px}
+  #report h4{color:var(--navy2);margin:10px 0 4px}
+  /* 테마 토글 */
+  .themetoggle{position:absolute;top:14px;right:20px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(201,168,109,.5);background:rgba(255,255,255,.08);color:#f3ead4;font-size:16px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:21}
+  .themetoggle:hover{background:rgba(201,168,109,.22)}
+  header .brand{top:54px}
+  /* === 다크 모드 === */
+  [data-theme="dark"]{--ink:#e9e3d5;--sub:#a59f90;--line:#39414f;--bg:#0e131b;--bg2:#121a26;--card:#1a2230;--gold:#c9a86d;--gold2:#e0c489;--shadow:0 16px 44px -18px rgba(0,0,0,.65)}
+  [data-theme="dark"] body{background:radial-gradient(1100px 540px at 82% -12%,rgba(201,168,109,.10),transparent 60%),linear-gradient(180deg,#0e131b,#141d2a)}
+  [data-theme="dark"] body::before{opacity:.22}
+  [data-theme="dark"] header{background:linear-gradient(135deg,#0c1726,#15273f)}
+  [data-theme="dark"] h2.t{color:var(--gold2)}
+  [data-theme="dark"] label{color:#cdd7e6}
+  [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#0f1622;color:var(--ink);border-color:var(--line)}
+  [data-theme="dark"] input:focus,[data-theme="dark"] select:focus,[data-theme="dark"] textarea:focus{background:#121b29;box-shadow:0 0 0 3px rgba(201,168,109,.22)}
+  [data-theme="dark"] .steps button{background:rgba(255,255,255,.04);color:var(--sub);border-color:var(--line)}
+  [data-theme="dark"] .steps button.on{background:linear-gradient(135deg,#1d3553,#27496f);color:#f0e6cf;border-color:#34507a}
+  [data-theme="dark"] .note{background:linear-gradient(180deg,#241f12,#1d1910);border-color:#48401f;color:#e3d3a6}
+  [data-theme="dark"] .note b{color:var(--gold2)}
+  [data-theme="dark"] .warn{background:#2a1814;color:#f0b3a3}
+  [data-theme="dark"] .ok{background:#13241c;color:#9bd9bb}
+  [data-theme="dark"] table{background:#141c28}
+  [data-theme="dark"] th{background:linear-gradient(180deg,#1d2a3d,#182336);color:var(--gold2)}
+  [data-theme="dark"] td input{color:var(--ink)}
+  [data-theme="dark"] td input:focus{background:#0f1622}
+  [data-theme="dark"] .btn-g{background:#222c3a;color:#dbe4f0;border-color:var(--line)}
+  [data-theme="dark"] .btn-p{background:linear-gradient(135deg,#1f3e63,#2c5688);color:#f0e6cf}
+  [data-theme="dark"] .nav{background:rgba(13,18,26,.92);border-top-color:var(--line)}
+  [data-theme="dark"] .pill{background:#26303f;color:#dbe4f0}
+  [data-theme="dark"] .funnel div{background:linear-gradient(180deg,#172230,#131b27);color:#cdd7e6;border-color:var(--line)}
+  [data-theme="dark"] #report h3{color:var(--gold2)}
+  [data-theme="dark"] #report h4{color:#bcd0ea}
+  @media print{ #report,#report *{color:#222!important;background:transparent!important} #report h3{color:#152d49!important;border-color:#b08d57!important} }
+
+</style>
+</head>
+<body>
+<header>
+  <h1>📋 목회계획 워크벤치 2027</h1>
+  <div class="sub">하나님 나라 백성공동체, 역사종말론적 증언공동체</div>
+  <div class="brand">비전AI교육연구소</div>
+  <button class="themetoggle" id="themeBtn" onclick="toggleTheme()" aria-label="테마 전환">🌙</button>
+  <div class="bar"><i id="prog"></i></div>
+</header>
+
+<div class="wrap">
+  <div class="steps" id="stepnav"></div>
+  <div id="view"></div>
+</div>
+
+<div class="nav noprint"><div class="wrapn">
+  <button class="btn btn-g" onclick="go(-1)">← 이전</button>
+  <button class="btn btn-g" style="flex:.6" onclick="saveExport()">💾 내보내기</button>
+  <button class="btn btn-p" onclick="go(1)">다음 →</button>
+</div></div>
+
+<script>
+//==== 상태 ====
+const KEY='pastorplan2027';
+let S=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){return fresh()}}
+function fresh(){return {step:0, ctx:{name:'',denom:'장로교',size:'중소형(80~150)',region:'중소도시',form:'담임+부교역자',pastor:''},
+  recall:{att:'',attConf:'중',newc:'',settle:'',h:{예배:3,말씀:3,교제:3,전도:3,양육:3,봉사:3,선교:3,재정:3},joy:'',pain:'',pray:'',text:'',strong:'',issue:''},
+  vision:{c1:'',c2:'',c3:'',motto:'',decl:''},
+  goals:{spirit:{g:'',base:'',target:'',ind:''},eva:{g:'',base:'',target:'',ind:''},nurture:{g:'',base:'',target:'',ind:''},keep:'',stop:''},
+  sermon:{q1:'',q2:'',q3:'',q4:'',weeks:{}},
+  events:[{n:'',when:'',axis:'전도',aim:''}],
+  actions:[{dept:'양육',act:'',when:'',who:'',res:''}],
+  res:{spirit:25,eva:25,nurture:25,admin:15,reserve:10,time:'',leadgap:''},
+  theme:'light',
+  review:{rows:[{ind:'',target:'',q:'분기'}]},
+  apikey:''};}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function set(path,val){let o=S,k=path.split('.');for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k[k.length-1]]=val;save()}
+
+//==== 2027 교회력 엔진 ====
+function computus(y){let a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3);
+  let h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451);
+  let mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da);}
+function fmt(d){return (d.getMonth()+1)+'/'+d.getDate()}
+function addD(d,n){let r=new Date(d);r.setDate(r.getDate()+n);return r}
+function nthSun(y,mo,n){let c=0;for(let day=1;day<=31;day++){let dt=new Date(y,mo-1,day);if(dt.getMonth()!==mo-1)break;if(dt.getDay()===0){c++;if(c===n)return dt}}return null}
+function lastSun(y,mo){for(let day=31;day>=1;day--){let dt=new Date(y,mo-1,day);if(dt.getMonth()===mo-1&&dt.getDay()===0)return dt}}
+function cal2027(){
+  const y=2027,E=computus(y),anchors={};
+  anchors[fmt(nthSun(y,1,1))]='신년주일';anchors[fmt(addD(E,-7))]='종려주일';anchors[fmt(E)]='부활주일';
+  anchors[fmt(nthSun(y,5,1))]='어린이주일';anchors[fmt(nthSun(y,5,2))]='어버이주일';anchors[fmt(addD(E,49))]='성령강림';
+  anchors[fmt(nthSun(y,7,1))]='맥추감사';anchors[fmt(lastSun(y,10))]='종교개혁';anchors[fmt(nthSun(y,11,3))]='추수감사';
+  let adv=new Date(y,11,25);while(adv.getDay()!==0)adv=addD(adv,-1);anchors[fmt(addD(adv,-21))]='대강절1주';anchors[fmt(adv)]='성탄주일';
+  // 52 sundays
+  let first=new Date(y,0,1);while(first.getDay()!==0)first=addD(first,1);
+  let weeks=[];for(let i=0;i<53;i++){let s=addD(first,i*7);if(s.getFullYear()>y)break;let q=Math.floor(s.getMonth()/3)+1;weeks.push({no:i+1,date:fmt(s),q,season:anchors[fmt(s)]||''});}
+  return weeks;
+}
+const CAL=cal2027();
+
+//==== 스텝 정의 ====
+const STEPS=[
+ {t:'교회 정보',f:stepCtx},{t:'회상·진단',f:stepRecall},{t:'표어·분별',f:stepVision},{t:'3축 목표',f:stepGoals},
+ {t:'52주 설교',f:stepSermon},{t:'핵심 행사',f:stepEvents},{t:'부서 실행',f:stepActions},{t:'자원 정렬',f:stepRes},
+ {t:'점검 리듬',f:stepReview},{t:'계획서 완성',f:stepReport}];
+
+function render(){
+  document.getElementById('prog').style.width=Math.round(S.step/(STEPS.length-1)*100)+'%';
+  const nav=document.getElementById('stepnav');nav.innerHTML='';
+  STEPS.forEach((s,i)=>{let b=document.createElement('button');b.textContent=(i+1)+'.'+s.t;if(i===S.step)b.className='on';b.onclick=()=>{S.step=i;save();render()};nav.appendChild(b)});
+  document.getElementById('view').innerHTML=STEPS[S.step].f();
+  window.scrollTo(0,0);
+}
+function go(d){let n=S.step+d;if(n<0||n>=STEPS.length)return;S.step=n;save();render()}
+function bind(id,path){let el=document.getElementById(id);if(!el)return;el.addEventListener('input',()=>{set(path,el.type==='range'?+el.value:el.value);if(el.type==='range'){let sp=document.getElementById(id+'_v');if(sp)sp.textContent=el.value}})}
+
+//==== 공통 ====
+function sizeTip(){const s=S.ctx.size;
+ if(s.includes('개척')||s.includes('미자립'))return '개척·미자립: 핵심행사 1개·1Q만 주별 설교·양육은 목사 1:1. 지표는 성장률이 아니라 정착·관계밀도.';
+ if(s.includes('소형'))return '도시 소형(강소교회): 친밀·공동체성·지역봉사가 무기. 소그룹 활성화에 집중.';
+ if(s.includes('중형'))return '중형: 위임·자동 리포트·후임/리더 양성(청빙 대비)을 계획에 포함.';
+ return '중소형: 정착 트랙 신설 + 부서 실행 본격화 + 리더 1축.';}
+
+//==== STEP 0 교회정보 ====
+function stepCtx(){setTimeout(()=>{['name','pastor'].forEach(k=>bind('c_'+k,'ctx.'+k));['denom','size','region','form'].forEach(k=>bind('c_'+k,'ctx.'+k))},0);
+ return `<div class="card"><h2 class="t">1. 교회 정보</h2><p class="lead">누구든 쓸 수 있도록 한 번만 입력합니다. 이후 모든 안내가 이 상황에 맞춰집니다.</p>
+ <label>교회명</label><input id="c_name" value="${S.ctx.name}" placeholder="예: 은혜교회">
+ <label>담임목사</label><input id="c_pastor" value="${S.ctx.pastor}" placeholder="예: 홍길동 목사">
+ <div class="row">
+  <div><label>교단/전통</label><select id="c_denom">${opts(['장로교','감리교','성결교','침례교','순복음/오순절','성공회','독립/초교파','기타'],S.ctx.denom)}</select></div>
+  <div><label>규모대</label><select id="c_size">${opts(['개척~미자립(~30)','소형(30~80)','중소형(80~150)','중형(150~300)','기타'],S.ctx.size)}</select></div></div>
+ <div class="row">
+  <div><label>지역</label><select id="c_region">${opts(['대도시','중소도시','농어촌','신도시','해외한인'],S.ctx.region)}</select></div>
+  <div><label>목회 형태</label><select id="c_form">${opts(['담임 단독','담임+부교역자','다음세대 비중 높음'],S.ctx.form)}</select></div></div>
+ <div class="note">📌 <b>규모별 전략</b>: <span id="sztip">${sizeTip()}</span></div>
+ <div class="note">📊 <b>2027 데이터 진단</b>(목회데이터연구소 트렌드 ’25·’26): 심플처치 찬성 목회자 <b>86%</b> · 소그룹 79→<b>74%</b>(최대 낙폭) · 영적갈급 76%인데 기도 <b>27분/일</b> · 설교 신앙성장 기여 64→<b>28%</b>·미디어 1→19% · AI목회 41→<b>80%</b>. → 2027은 <b>①빼고 깊게 ②돌봄·소그룹 회복 ③영성 본질 회복</b>의 해.</div></div>`}
+function opts(a,sel){return a.map(x=>`<option ${x===sel?'selected':''}>${x}</option>`).join('')}
+
+//==== STEP 1 회상·진단 ====
+function stepRecall(){setTimeout(()=>{bind('r_att','recall.att');bind('r_attConf','recall.attConf');bind('r_newc','recall.newc');bind('r_settle','recall.settle');
+ ['joy','pain','pray','text','strong','issue'].forEach(k=>bind('r_'+k,'recall.'+k));
+ Object.keys(S.recall.h).forEach(k=>{let el=document.getElementById('h_'+k);if(el)el.addEventListener('input',()=>{S.recall.h[k]=+el.value;document.getElementById('hv_'+k).textContent=el.value;save()})})},0);
+ const hs=Object.keys(S.recall.h).map(k=>`<div class="slider-row"><label style="width:46px;margin:0">${k}</label><input type="range" min="1" max="5" id="h_${k}" value="${S.recall.h[k]}"><span id="hv_${k}">${S.recall.h[k]}</span></div>`).join('');
+ return `<div class="card"><h2 class="t">2. 회상 · 진단</h2><p class="lead">자료 없이 기억나는 대로. 추정은 범위와 신뢰수준으로 적습니다.</p>
+ <div class="row"><div><label>평균 주일출석(범위 OK)</label><input id="r_att" value="${S.recall.att}" placeholder="예: 110~130명"></div>
+ <div><label>신뢰수준</label><select id="r_attConf">${opts(['상','중','하'],S.recall.attConf)}</select></div></div>
+ <div class="row"><div><label>작년 새가족(명)</label><input id="r_newc" value="${S.recall.newc}" placeholder="예: 20"></div>
+ <div><label>6개월 정착(명) ← 진짜 병목</label><input id="r_settle" value="${S.recall.settle}" placeholder="예: 12"></div></div>
+ <label>건강 8영역 체감(1~5)</label>${hs}
+ <div class="funnel"><div>전도<br>${S.recall.newc||'?'}</div><div>→ 정착<br>${S.recall.settle||'?'}</div><div>→ 양육<br>?</div><div>→ 리더<br>?</div></div>
+ <div class="note">정착률이 50% 미만이면 <b>전도보다 정착·양육</b>이 올해 우선 과제일 가능성이 큽니다.</div>
+ <div class="note">📊 소그룹 참여 79→74%(목회데이터연구소, 최대 낙폭) · 고령교인 <b>54%</b>가 또래 교제를 원함 → <b>돌봄·소그룹</b>이 2027 핵심 과제.</div>
+ <label>가장 기뻤던 일</label><textarea id="r_joy">${S.recall.joy}</textarea>
+ <label>가장 아팠던 일 / 밤잠 설친 고민</label><textarea id="r_pain">${S.recall.pain}</textarea>
+ <div class="row"><div><label>올해 붙든 기도 키워드</label><input id="r_pray" value="${S.recall.pray}" placeholder="예: 회복"></div>
+ <div><label>붙든 본문</label><input id="r_text" value="${S.recall.text}" placeholder="예: 느헤미야"></div></div>
+ <label>Top 강점(3)</label><input id="r_strong" value="${S.recall.strong}" placeholder="예: 예배·전도력·재정안정">
+ <label>시급 과제(3)</label><input id="r_issue" value="${S.recall.issue}" placeholder="예: 청년이탈·정착·양육"></div>`}
+
+//==== STEP 2 표어 ====
+function stepVision(){setTimeout(()=>{['c1','c2','c3','motto','decl'].forEach(k=>bind('v_'+k,'vision.'+k))},0);
+ return `<div class="card"><h2 class="t">3. 표어 · 방향 분별</h2><p class="lead">후보를 펼치고 <b>기도 가운데 목사가</b> 확정합니다. 표어엔 <b>동사가 살아 있어야</b> 실행이 나옵니다.</p>
+ <button class="btn-ai" onclick="aiMotto()">🤖 AI로 표어 후보 생성</button> <span class="muted">(설정에서 API 키 입력 시)</span>
+ <label>후보1 (영성형)</label><input id="v_c1" value="${S.vision.c1}" placeholder="예: 다시, 첫사랑으로 (계 2:4-5)">
+ <label>후보2 (전도형)</label><input id="v_c2" value="${S.vision.c2}" placeholder="예: 성벽을 다시 쌓는 교회 (느 2:17)">
+ <label>후보3 (공동체형)</label><input id="v_c3" value="${S.vision.c3}" placeholder="예: 한 사람을 끝까지 (눅 15:4)">
+ <label>✅ 확정 표어</label><input id="v_motto" value="${S.vision.motto}" placeholder="확정한 표어">
+ <label>방향 선언문(1단락)</label><textarea id="v_decl">${S.vision.decl}</textarea>
+ <div class="note">추상명사("사랑·은혜")만으론 액자가 됩니다. "회복하는·세우는·돌보는" 처럼 동작을 넣으세요.</div></div>`}
+
+//==== STEP 3 목표 ====
+function stepGoals(){setTimeout(()=>{['spirit','eva','nurture'].forEach(ax=>['g','base','target','ind'].forEach(k=>bind('g_'+ax+'_'+k,'goals.'+ax+'.'+k)));bind('g_keep','goals.keep');bind('g_stop','goals.stop')},0);
+ const ax=(id,name)=>`<h4 style="color:var(--navy);margin-top:12px">${name}</h4>
+  <input id="g_${id}_g" value="${S.goals[id].g}" placeholder="목표(정성)">
+  <div class="row"><input id="g_${id}_base" value="${S.goals[id].base}" placeholder="기준선">
+  <input id="g_${id}_target" value="${S.goals[id].target}" placeholder="2027 목표치">
+  <input id="g_${id}_ind" value="${S.goals[id].ind}" placeholder="신호 지표(정량)"></div>`;
+ return `<div class="card"><h2 class="t">4. 영성·전도·양육 3축 목표</h2><p class="lead">정성 목표 + 정량 지표를 <b>한 쌍</b>으로. 숫자만 남으면 율법이 됩니다.</p>
+ ${ax('spirit','① 영성')}${ax('eva','② 전도')}${ax('nurture','③ 양육')}
+ <label>올해 유지할 것</label><input id="g_keep" value="${S.goals.keep}" placeholder="예: 부활절 전도">
+ <label>올해 중단할 것 (더하기 전 빼기)</label><input id="g_stop" value="${S.goals.stop}" placeholder="예: 효과 낮은 가을 바자회"></div>`}
+
+//==== STEP 4 설교 ====
+function stepSermon(){setTimeout(()=>{['q1','q2','q3','q4'].forEach(k=>bind('s_'+k,'sermon.'+k));
+ CAL.forEach(w=>{['season','text','title'].forEach(f=>{let el=document.getElementById('w_'+w.no+'_'+f);if(el)el.addEventListener('input',()=>{S.sermon.weeks[w.no]=S.sermon.weeks[w.no]||{};S.sermon.weeks[w.no][f]=el.value;save()})})})},0);
+ const rows=CAL.map(w=>{let wk=S.sermon.weeks[w.no]||{};let sv=(wk.season!==undefined?wk.season:(w.season||''));return `<tr><td>${w.no}</td><td>${w.date}</td><td><input id="w_${w.no}_season" value="${sv}" placeholder="절기"></td><td><input id="w_${w.no}_text" value="${wk.text||''}" placeholder="본문"></td><td><input id="w_${w.no}_title" value="${wk.title||''}" placeholder="제목"></td></tr>`}).join('');
+ return `<div class="card"><h2 class="t">5. 2027 52주 설교계획 ★심장</h2><p class="lead">2027 날짜·절기는 자동 배치됨(부활 3/28·52주). <b>롤링</b>: 1분기는 주별, 2~4분기는 시리즈 주제만 채워도 됩니다.</p>
+ <button class="btn-ai" onclick="aiSermon()">🤖 AI로 분기 시리즈 초안</button>
+ <div class="row"><input id="s_q1" value="${S.sermon.q1}" placeholder="1Q 시리즈(영성·회복)"><input id="s_q2" value="${S.sermon.q2}" placeholder="2Q 시리즈(전도·부흥)"></div>
+ <div class="row"><input id="s_q3" value="${S.sermon.q3}" placeholder="3Q 시리즈(양육)"><input id="s_q4" value="${S.sermon.q4}" placeholder="4Q 시리즈(감사·파송)"></div>
+ <div style="max-height:340px;overflow:auto;margin-top:8px"><table><tr><th>주</th><th>날짜</th><th>절기</th><th>본문</th><th>제목</th></tr>${rows}</table></div>
+ <div class="note">📊 "설교가 신앙성장에 도움" 64→<b>28%</b>(10년)·미디어 1→<b>19%</b>(목회데이터연구소) — 설교는 여전히 핵심이되 <b>영상·미디어 병행</b>이 효과적. 본문·해석 최종권한은 목사(AI는 초안).</div></div>`}
+
+//==== STEP 5 행사 ====
+function stepEvents(){setTimeout(()=>{S.events.forEach((e,i)=>['n','when','axis','aim'].forEach(k=>{let el=document.getElementById('e_'+i+'_'+k);if(el)el.addEventListener('input',()=>{S.events[i][k]=el.value;save()})}))},0);
+ const rows=S.events.map((e,i)=>`<tr><td><input id="e_${i}_n" value="${e.n}" placeholder="행사명"></td><td><input id="e_${i}_when" value="${e.when}" placeholder="시기"></td>
+  <td><select id="e_${i}_axis">${opts(['영성','전도','양육','감사'],e.axis)}</select></td><td><input id="e_${i}_aim" value="${e.aim}" placeholder="목적/섬기는 목표"></td>
+  <td class="noprint"><button class="btn-g" style="padding:4px 8px" onclick="delRow('events',${i})">✕</button></td></tr>`).join('');
+ const warn=S.events.length>5?'<div class="warn">⚠ 핵심 행사가 5개를 넘습니다 — "행사 수보다 깊이". 목적 없는 행사는 정리하세요.</div>':'';
+ return `<div class="card"><h2 class="t">6. 핵심 행사 (3~5개) ★심장</h2><p class="lead">각 행사가 <b>어느 축·목표를 섬기는지</b> 명시. "작년에 했으니"는 폐지 1순위.</p>
+ <div class="note">📊 심플처치: "사역 줄이고 집중" 찬성 목회자 <b>86%</b>·성도 72%(목회데이터연구소) → 핵심행사는 <b>적게, 깊게</b>.</div>
+ ${warn}<button class="btn-ai" onclick="aiEvents()">🤖 AI로 행사 제안</button>
+ <table><tr><th>행사명</th><th>시기</th><th>축</th><th>목적</th><th class="noprint"></th></tr>${rows}</table>
+ <button class="btn-g noprint" style="margin-top:8px;flex:none;padding:8px 14px" onclick="addRow('events',{n:'',when:'',axis:'전도',aim:''})">+ 행사 추가</button></div>`}
+
+//==== STEP 6 부서 실행 ====
+function stepActions(){setTimeout(()=>{S.actions.forEach((a,i)=>['dept','act','when','who','res'].forEach(k=>{let el=document.getElementById('a_'+i+'_'+k);if(el)el.addEventListener('input',()=>{S.actions[i][k]=el.value;save()})}))},0);
+ const rows=S.actions.map((a,i)=>`<tr><td><input id="a_${i}_dept" value="${a.dept}" placeholder="부서"></td><td><input id="a_${i}_act" value="${a.act}" placeholder="행동"></td>
+  <td><input id="a_${i}_when" value="${a.when}" placeholder="시기"></td><td><input id="a_${i}_who" value="${a.who}" placeholder="담당"></td><td><input id="a_${i}_res" value="${a.res}" placeholder="자원"></td>
+  <td class="noprint"><button class="btn-g" style="padding:4px 8px" onclick="delRow('actions',${i})">✕</button></td></tr>`).join('');
+ return `<div class="card"><h2 class="t">7. 부서별 실행계획</h2><p class="lead">"언제·누가" 없는 계획은 소망사항입니다. 담당/자원 빈칸을 지금 드러내세요.</p>
+ <table><tr><th>부서</th><th>행동</th><th>시기</th><th>담당</th><th>자원</th><th class="noprint"></th></tr>${rows}</table>
+ <button class="btn-g noprint" style="margin-top:8px;flex:none;padding:8px 14px" onclick="addRow('actions',{dept:'',act:'',when:'',who:'',res:''})">+ 행동 추가</button></div>`}
+
+//==== STEP 7 자원 ====
+function stepRes(){setTimeout(()=>{['spirit','eva','nurture','admin','reserve'].forEach(k=>{let el=document.getElementById('rs_'+k);if(el)el.addEventListener('input',()=>{S.res[k]=+el.value;document.getElementById('rsv_'+k).textContent=el.value;document.getElementById('rs_sum').textContent=resSum();save()})});bind('rs_time','res.time');bind('rs_leadgap','res.leadgap')},0);
+ const sl=(k,n)=>`<div class="slider-row"><label style="width:80px;margin:0">${n}</label><input type="range" min="0" max="60" id="rs_${k}" value="${S.res[k]}"><span id="rsv_${k}">${S.res[k]}</span>%</div>`;
+ return `<div class="card"><h2 class="t">8. 자원 정렬 (예산 비율·시간)</h2><p class="lead">절대 금액 불필요 — <b>비율</b>로. "더하기 전 빼기".</p>
+ ${sl('spirit','영성/교육')}${sl('eva','전도/선교')}${sl('nurture','양육/돌봄')}${sl('admin','행정/운영')}${sl('reserve','예비')}
+ <div class="${resSum()===100?'ok':'warn'}">합계 <span id="rs_sum">${resSum()}</span>% ${resSum()===100?'✓':'(100%로 맞추세요)'}</div>
+ <label>담임목사 주간 시간 배분(보호할 것)</label><input id="rs_time" value="${S.res.time}" placeholder="예: 설교준비 보호 + 양육 직접 + 안식 1일">
+ <label>리더 공백 / 양성 필요</label><input id="rs_leadgap" value="${S.res.leadgap}" placeholder="예: 정착팀 리더 1명 양성"></div>`}
+function resSum(){return S.res.spirit+S.res.eva+S.res.nurture+S.res.admin+S.res.reserve}
+
+//==== STEP 8 점검 ====
+function stepReview(){setTimeout(()=>{S.review.rows.forEach((r,i)=>['ind','target'].forEach(k=>{let el=document.getElementById('rv_'+i+'_'+k);if(el)el.addEventListener('input',()=>{S.review.rows[i][k]=el.value;save()})}))},0);
+ const rows=S.review.rows.map((r,i)=>`<tr><td><input id="rv_${i}_ind" value="${r.ind}" placeholder="지표"></td><td><input id="rv_${i}_target" value="${r.target}" placeholder="목표치"></td><td>🟢🟡🔴</td><td class="noprint"><button class="btn-g" style="padding:4px 8px" onclick="delRow2(${i})">✕</button></td></tr>`).join('');
+ return `<div class="card"><h2 class="t">9. 점검 리듬 (분기 스코어카드)</h2><p class="lead">점검은 성과 압박이 아니라 돌봄. 분기 1회·30분이면 충분.</p>
+ <table><tr><th>지표</th><th>목표치</th><th>신호</th><th class="noprint"></th></tr>${rows}</table>
+ <button class="btn-g noprint" style="margin-top:8px;flex:none;padding:8px 14px" onclick="S.review.rows.push({ind:'',target:'',q:'분기'});save();render()">+ 지표 추가</button>
+ <div class="note">반기(6월·12월) 공식 점검·수정일을 당회와 함께 못박으세요.</div></div>`}
+function delRow2(i){S.review.rows.splice(i,1);save();render()}
+
+//==== STEP 9 보고서 ====
+function stepReport(){
+ const g=S.goals,c=S.ctx;
+ const effS=(w)=>{let wk=S.sermon.weeks[w.no]||{};return (wk.season!==undefined?wk.season:(w.season||''))};
+ const sermonRows=CAL.filter(w=>{let wk=S.sermon.weeks[w.no]||{};return effS(w)||wk.text||wk.title}).map(w=>{let wk=S.sermon.weeks[w.no]||{};return `<tr><td>${w.no}</td><td>${w.date}</td><td>${effS(w)}</td><td>${wk.text||''}</td><td>${wk.title||''}</td></tr>`}).join('');
+ const evRows=S.events.filter(e=>e.n).map(e=>`<tr><td>${e.n}</td><td>${e.when}</td><td>${e.axis}</td><td>${e.aim}</td></tr>`).join('');
+ const acRows=S.actions.filter(a=>a.act).map(a=>`<tr><td>${a.dept}</td><td>${a.act}</td><td>${a.when}</td><td>${a.who||'<b style="color:#e84118">미정</b>'}</td><td>${a.res}</td></tr>`).join('');
+ const rvRows=S.review.rows.filter(r=>r.ind).map(r=>`<tr><td>${r.ind}</td><td>${r.target}</td><td>🟢🟡🔴</td></tr>`).join('');
+ const rep=`<div id="report">
+  <h3 style="font-size:22px;text-align:center;border:none">${c.name||'○○교회'} 2027 신년 목회계획서</h3>
+  <p style="text-align:center" class="muted">${c.denom} · ${c.region} · ${c.size} · ${c.pastor||''} · 비전AI교육연구소 PastorPlan 2027</p>
+  <h3>1. 표어</h3><p style="font-size:20px;font-weight:800;color:var(--navy)">${S.vision.motto||'(미정)'}</p><p>${S.vision.decl||''}</p>
+  <h3>2. 현황 진단</h3><p>평균출석 ${S.recall.att||'?'} (신뢰 ${S.recall.attConf}) · 새가족 ${S.recall.newc||'?'} → 정착 ${S.recall.settle||'?'}</p>
+  <p><b>강점</b>: ${S.recall.strong||'-'} / <b>시급 과제</b>: ${S.recall.issue||'-'}</p>
+  <h3>3. 3축 목표</h3><table><tr><th>축</th><th>목표</th><th>기준선</th><th>2027 목표치</th><th>지표</th></tr>
+   <tr><td>영성</td><td>${g.spirit.g}</td><td>${g.spirit.base}</td><td>${g.spirit.target}</td><td>${g.spirit.ind}</td></tr>
+   <tr><td>전도</td><td>${g.eva.g}</td><td>${g.eva.base}</td><td>${g.eva.target}</td><td>${g.eva.ind}</td></tr>
+   <tr><td>양육</td><td>${g.nurture.g}</td><td>${g.nurture.base}</td><td>${g.nurture.target}</td><td>${g.nurture.ind}</td></tr></table>
+   <p class="muted">유지: ${g.keep||'-'} / 중단: ${g.stop||'-'}</p>
+  <h3>4. 52주 설교계획 (절기·핵심)</h3><p class="muted">1Q ${S.sermon.q1} / 2Q ${S.sermon.q2} / 3Q ${S.sermon.q3} / 4Q ${S.sermon.q4}</p>
+   <table><tr><th>주</th><th>날짜</th><th>절기</th><th>본문</th><th>제목</th></tr>${sermonRows||'<tr><td colspan=5 class=muted>입력 시 표시</td></tr>'}</table>
+  <h3>5. 핵심 행사</h3><table><tr><th>행사</th><th>시기</th><th>축</th><th>목적</th></tr>${evRows||'<tr><td colspan=4 class=muted>-</td></tr>'}</table>
+  <h3>6. 부서 실행계획</h3><table><tr><th>부서</th><th>행동</th><th>시기</th><th>담당</th><th>자원</th></tr>${acRows||'<tr><td colspan=5 class=muted>-</td></tr>'}</table>
+  <h3>7. 자원 배분(비율)</h3><p>영성 ${S.res.spirit}% · 전도 ${S.res.eva}% · 양육 ${S.res.nurture}% · 행정 ${S.res.admin}% · 예비 ${S.res.reserve}%</p>
+   <p>목사 시간: ${S.res.time||'-'} / 리더: ${S.res.leadgap||'-'}</p>
+  <h3>8. 점검 스코어카드(분기)</h3><table><tr><th>지표</th><th>목표</th><th>신호</th></tr>${rvRows||'<tr><td colspan=3 class=muted>-</td></tr>'}</table>
+  <p class="muted" style="margin-top:14px">* 추정치는 신뢰수준으로 표기됨. 본 계획은 기억 기반 80% 초안 — 귀가 후 실제 자료로 보강(옵션2) 권장. 본문·해석 최종권한은 목사.</p>
+ </div>`;
+ return `<div class="card"><h2 class="t">10. 2027 목회계획서 완성</h2><p class="lead">아래가 자동 생성된 계획서입니다. 인쇄 버튼으로 <b>PDF 저장</b>하세요.</p>
+  <button class="btn-p noprint" style="flex:none;padding:11px 18px" onclick="window.print()">🖨️ 인쇄 / PDF 저장</button>
+  <button class="btn-g noprint" style="flex:none;padding:11px 18px" onclick="saveExport()">💾 JSON 내보내기</button>
+  <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">${rep}</div>`}
+
+//==== 행 추가/삭제 ====
+function addRow(k,o){S[k].push(o);save();render()}
+function delRow(k,i){S[k].splice(i,1);if(!S[k].length)S[k].push(k==='events'?{n:'',when:'',axis:'전도',aim:''}:{dept:'',act:'',when:'',who:'',res:''});save();render()}
+
+//==== 저장/불러오기 ====
+function saveExport(){const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(S.ctx.name||'교회')+'_2027목회계획.json';a.click()}
+
+//==== AI (선택: 본인 Claude API 키) ====
+function getKey(){if(!S.apikey){S.apikey=prompt('Claude API 키를 입력하세요 (sk-ant-...). 기기에만 저장됩니다.')||'';save()}return S.apikey}
+async function callClaude(prompt){const key=getKey();if(!key){alert('API 키가 필요합니다');return null}
+ try{const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'content-type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+  body:JSON.stringify({model:'claude-opus-4-8',max_tokens:1500,messages:[{role:'user',content:prompt}]})});
+  const d=await r.json();if(d.error){alert('AI 오류: '+d.error.message);return null}return d.content[0].text}
+ catch(e){alert('네트워크 오류: '+e.message);return null}}
+function ctxLine(){return `교회: ${S.ctx.name}(${S.ctx.denom},${S.ctx.region},${S.ctx.size}). 기도키워드:${S.recall.pray}, 본문:${S.recall.text}, 시급과제:${S.recall.issue}.`}
+async function aiMotto(){const t=await callClaude(`${ctxLine()} 2027 교회 표어 후보를 영성형/전도형/공동체형 각 1개씩, "표어 (핵심본문)" 형식 한 줄로 3개만. 동사가 살아있게.`);if(t){const L=t.split('\n').filter(x=>x.trim());set('vision.c1',(L[0]||'').replace(/^[\d\-.\s영성형:]*/,''));set('vision.c2',(L[1]||'').replace(/^[\d\-.\s전도형:]*/,''));set('vision.c3',(L[2]||'').replace(/^[\d\-.\s공동체형:]*/,''));render()}}
+async function aiSermon(){const t=await callClaude(`${ctxLine()} 확정표어:"${S.vision.motto}". 2027 분기 설교 시리즈 주제를 1Q~4Q 각 한 줄로(시즌: 1Q영성 2Q전도 3Q양육 4Q감사). "1Q: ..." 형식 4줄만.`);if(t){const L=t.split('\n').filter(x=>x.includes('Q'));['q1','q2','q3','q4'].forEach((k,i)=>{if(L[i])set('sermon.'+k,L[i].replace(/^.*Q[:\s]*/,''))});render()}}
+async function aiEvents(){const t=await callClaude(`${ctxLine()} 표어:"${S.vision.motto}". 표어·3축을 구현할 핵심행사 3개를 "행사명|시기|축(영성/전도/양육)|목적" 형식 3줄로. 작은 교회 인력 고려.`);if(t){const L=t.split('\n').filter(x=>x.includes('|'));S.events=L.slice(0,5).map(x=>{const p=x.split('|');return {n:(p[0]||'').replace(/^[\d\-.\s]*/,'').trim(),when:(p[1]||'').trim(),axis:(p[2]||'전도').trim(),aim:(p[3]||'').trim()}});save();render()}}
+
+function applyTheme(){document.documentElement.setAttribute('data-theme',S.theme||'light');var b=document.getElementById('themeBtn');if(b)b.textContent=(S.theme==='dark')?'☀️':'🌙'}
+function toggleTheme(){S.theme=(S.theme==='dark')?'light':'dark';save();applyTheme()}
+applyTheme();
+render();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
